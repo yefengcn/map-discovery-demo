@@ -20,21 +20,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: List workspace contents
-        run: |
-          echo "Workspace contents:"
-          ls -la
-          echo "Directory structure:"
-          tree -a -I '.git'
-      
       - name: Setup Pages
         uses: actions/configure-pages@v4
+
+      - name: Prepare artifact
+        run: |
+          echo "Creating artifact directory..."
+          mkdir -p _site
+          echo "Copying files..."
+          cp -r index.html css js images favicon.ico _site/
+          echo "Listing _site contents:"
+          ls -la _site
       
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
-          retention-days: 1
+          path: _site
       
       - name: Deploy to GitHub Pages
         id: deployment
