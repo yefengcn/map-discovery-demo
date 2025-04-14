@@ -1966,8 +1966,8 @@ document.getElementById('personalize').addEventListener('click', () => {
         const el = document.createElement('div');
         el.style.cssText = `
             position: relative;
-            width: 48px;
-            height: 48px;
+            width: 100px;
+            height: 100px;
         `;
         
         // 添加射线元素
