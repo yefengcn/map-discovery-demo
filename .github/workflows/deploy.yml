@@ -19,6 +19,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: List workspace contents
+        run: |
+          echo "Workspace contents:"
+          ls -la
+          echo "Directory structure:"
+          tree -a -I '.git'
       
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -27,6 +34,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: .
+          retention-days: 1
       
       - name: Deploy to GitHub Pages
         id: deployment
