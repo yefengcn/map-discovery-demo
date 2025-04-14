@@ -1,0 +1,799 @@
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #3b82f6;
+    --background-color: #ffffff;
+    --text-color: #1f2937;
+    --accent-color: #f59e0b;
+}
+
+/* 移除所有元素的焦点轮廓 */
+*:focus {
+    outline: none !important;
+}
+
+/* 移除地图相关元素的焦点轮廓 */
+.maplibregl-canvas-container:focus,
+.maplibregl-canvas:focus,
+#map:focus {
+    outline: none !important;
+}
+
+/* 为按钮添加更微妙的焦点效果 */
+.action-button:focus {
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+
+.hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+}
+
+.logo {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.75);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 2rem;
+    font-weight: 500;
+    transition: opacity 0.3s ease;
+}
+
+.nav-links a:hover {
+    opacity: 0.8;
+}
+
+.hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 90%;
+    max-width: 800px;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.hero-content .subtitle {
+    font-size: 1.5rem;
+    opacity: 0.9;
+}
+
+.map-section {
+    min-height: 100vh;
+    position: relative;
+}
+
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.maplibregl-popup,
+.poi-popup {
+    max-width: none !important;
+}
+
+.maplibregl-popup-content,
+.poi-popup .maplibregl-popup-content {
+    width: 300px !important;
+    min-width: 300px !important;
+}
+
+.maplibregl-popup-tip {
+    display: none !important;
+}
+
+.maplibregl-popup-close-button {
+    width: 24px !important;
+    height: 24px !important;
+    font-size: 20px !important;
+    color: white !important;
+    background: rgba(0, 0, 0, 0.5) !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    right: 8px !important;
+    top: 8px !important;
+    transition: all 0.2s ease !important;
+}
+
+.maplibregl-popup-close-button:hover {
+    background: rgba(0, 0, 0, 0.7) !important;
+    transform: scale(1.1) !important;
+}
+
+.interaction-controls {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 1rem;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.control-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    background: white;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.control-btn:hover {
+    transform: translateY(-2px);
+}
+
+.control-btn .icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.features-section {
+    padding: 4rem 2rem;
+    background: #f8fafc;
+}
+
+.features-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.feature-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.poi-marker {
+    width: 30px;
+    height: 30px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.poi-marker:hover {
+    transform: scale(1.1);
+}
+
+.poi-marker i {
+    color: #ff6b6b;
+    font-size: 16px;
+}
+
+.poi-marker.active {
+    transform: scale(1.2);
+    z-index: 1000;
+}
+
+.poi-content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.poi-content img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.poi-name {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    font-size: 10px;
+    padding: 2px 4px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.poi-type {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    background: rgba(255,255,255,0.9);
+    color: #333;
+    font-size: 8px;
+    padding: 1px 4px;
+    border-radius: 4px;
+}
+
+.poi-info h3 {
+    margin: 0 0 4px;
+    font-size: 14px;
+    color: #333;
+}
+
+.poi-info .poi-type {
+    display: inline-block;
+    background: #f0f0f0;
+    color: #666;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+}
+
+.poi-info .poi-description {
+    margin: 0;
+    font-size: 12px;
+    color: #666;
+    line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-content .subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .interaction-controls {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 0.5rem;
+    }
+    
+    .control-btn {
+        padding: 0.5rem 1rem;
+    }
+}
+
+/* 优化地图文字渲染 */
+.leaflet-tile-container {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.leaflet-container {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-weight: 500;
+}
+
+.event-popup .maplibregl-popup-content {
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+}
+
+.event-popup .maplibregl-popup-tip {
+    display: none !important;
+}
+
+.event-popup {
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.action-buttons {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.75);
+    padding: 10px;
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.action-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 80px;
+}
+
+.action-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.action-button .icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(59, 130, 246, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
+    position: relative;
+}
+
+/* 移除个性化按钮的射线效果 */
+#personalize .icon::after {
+    display: none;
+}
+
+/* 优化小人射线效果 */
+.avatar-ray {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 4px;
+    background: rgba(59, 130, 246, 0.3);
+    border-radius: 50%;
+    filter: blur(2px);
+    animation: rayPulse 2s ease-in-out infinite;
+    z-index: 0;
+}
+
+@keyframes rayPulse {
+    0% {
+        transform: translateX(-50%) scale(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translateX(-50%) scale(1.2);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateX(-50%) scale(1);
+        opacity: 0.3;
+    }
+}
+
+.action-button .text {
+    font-size: 12px;
+    opacity: 0.9;
+}
+
+/* 功能按钮容器 */
+.button-container {
+    position: fixed;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    z-index: 1;
+    padding: 0 20px;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* 功能按钮基础样式 */
+.map-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: rgba(0, 0, 0, 0.75);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.map-button:hover {
+    background: rgba(59, 130, 246, 0.75);
+    transform: translateY(-2px);
+}
+
+.map-button img {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.map-button .text {
+    flex: 1;
+    text-align: left;
+    white-space: nowrap;
+}
+
+/* Personalize按钮特殊样式 */
+.map-button#personalize {
+    position: relative;
+    overflow: visible;
+}
+
+.avatar-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar-ray {
+    position: absolute;
+    width: 150px;
+    height: 64px;
+    background: linear-gradient(90deg, 
+        rgba(96, 165, 250, 0.3) 0%,
+        rgba(96, 165, 250, 0.2) 40%,
+        transparent 100%
+    );
+    transform: rotate(0deg) translate(32px, -78px);
+    pointer-events: none;
+    z-index: -1;
+    border-radius: 100% 0 0 0;
+    left: 0;
+    top: 50%;
+    animation: avatarPulse 2s ease-in-out infinite;
+}
+
+@keyframes avatarPulse {
+    0% {
+        opacity: 0.6;
+        transform: rotate(0deg) translate(32px, -78px) scale(1);
+    }
+    50% {
+        opacity: 0.3;
+        transform: rotate(0deg) translate(32px, -78px) scale(1.1);
+    }
+    100% {
+        opacity: 0.6;
+        transform: rotate(0deg) translate(32px, -78px) scale(1);
+    }
+}
+
+.map-button#personalize:hover .avatar-ray {
+    animation: avatarPulseHover 1.5s ease-in-out infinite;
+}
+
+@keyframes avatarPulseHover {
+    0% {
+        opacity: 0.8;
+        transform: rotate(0deg) translate(32px, -78px) scale(1.1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: rotate(0deg) translate(32px, -78px) scale(1.2);
+    }
+    100% {
+        opacity: 0.8;
+        transform: rotate(0deg) translate(32px, -78px) scale(1.1);
+    }
+}
+
+/* 滚动条样式 */
+.button-container::-webkit-scrollbar {
+    height: 4px;
+}
+
+.button-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.button-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+}
+
+.button-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+/* 绘制提示样式 */
+.drawing-hint .maplibregl-popup-content {
+    background: rgba(0, 0, 0, 0.75);
+    color: white;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 14px;
+    backdrop-filter: blur(8px);
+}
+
+/* 顶点标记样式 */
+.vertex-marker {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.vertex-marker:hover {
+    transform: scale(1.2);
+}
+
+/* 类型选择器样式 */
+.type-selector {
+    background: rgba(0, 0, 0, 0.75);
+    padding: 8px 16px;
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.type-selector button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 4px 8px;
+    transition: all 0.2s ease;
+}
+
+.type-selector button:hover {
+    color: rgba(59, 130, 246, 1);
+}
+
+/* 路线偏好菜单样式 */
+.preference-menu {
+    background: rgba(0, 0, 0, 0.75);
+    border-radius: 8px;
+    padding: 8px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.preference-menu button {
+    display: block;
+    width: 100%;
+    padding: 8px 12px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 14px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 4px;
+}
+
+.preference-menu button:hover {
+    background: rgba(59, 130, 246, 0.2);
+}
+
+/* 事件弹窗样式 */
+.event-popup .maplibregl-popup-content {
+    background: none;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+}
+
+.event-popup .maplibregl-popup-tip {
+    display: none;
+}
+
+/* 动作菜单样式 */
+.action-menu-popup .maplibregl-popup-content {
+    background: none;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+}
+
+.action-menu-popup .maplibregl-popup-tip {
+    display: none;
+}
+
+.action-button {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    width: 100%;
+    border: none;
+    background: transparent;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.95);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 8px;
+    margin: 1px 0;
+}
+
+.action-button:hover {
+    background: rgba(59, 130, 246, 0.08);
+    transform: translateX(2px);
+}
+
+.action-button img {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.action-button .text {
+    flex: 1;
+    text-align: left;
+}
+
+/* POI Popup Styles */
+.maplibregl-popup {
+    max-width: none !important;
+    z-index: 1000;
+}
+
+.maplibregl-popup-content {
+    background: linear-gradient(180deg, 
+        rgba(23, 23, 28, 0.95) 0%,
+        rgba(17, 17, 23, 0.98) 100%);
+    border-radius: 16px;
+    padding: 16px;
+    color: rgba(255, 255, 255, 0.95);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    width: 300px;
+    min-width: 300px;
+}
+
+.maplibregl-popup-tip {
+    display: none;
+}
+
+.maplibregl-popup-close-button {
+    display: none !important;
+}
+
+.poi-popup-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.poi-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.poi-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px;
+}
+
+.poi-rating .stars {
+    color: #FFB800;
+    letter-spacing: 2px;
+}
+
+.poi-rating .rating-value {
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.poi-rating .reviews {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 13px;
+}
+
+.poi-description {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    line-height: 1.5;
+    margin-top: 4px;
+} 

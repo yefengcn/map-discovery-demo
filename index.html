@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gesture-powered Map Discovery Capabilities</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href='https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css' rel='stylesheet' />
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="map"></div>
+    
+    <div class="logo">
+        Gesture-powered Map Discovery Capabilities
+    </div>
+    
+    <div class="button-container">
+        <button class="map-button" id="circle-explore">
+            <img src="images/icons/circle-explore.svg" alt="Circle Explore">
+            <span class="text">Circle Explore</span>
+        </button>
+        <button class="map-button" id="tap-hold">
+            <img src="images/icons/tap-hold.svg" alt="Tap & Hold">
+            <span class="text">Tap & Hold</span>
+        </button>
+        <button class="map-button" id="swipe-filter">
+            <img src="images/icons/swipe-filter.svg" alt="Swipe Filter">
+            <span class="text">Swipe Filter</span>
+        </button>
+        <button class="map-button" id="sketch-route">
+            <img src="images/icons/sketch-route.svg" alt="Sketch Route">
+            <span class="text">Sketch Route</span>
+        </button>
+        <button class="map-button" id="personalize">
+            <div class="icon">
+                <img src="images/icons/personalize.svg" alt="Customization">
+            </div>
+            <span class="text">Customization</span>
+        </button>
+        <button class="map-button" id="trending">
+            <div class="icon">
+                <img src="images/icons/trending.svg" alt="Cool Things to Do">
+            </div>
+            <span class="text">Cool Things to Do</span>
+        </button>
+    </div>
+    
+    <script src='https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js'></script>
+    <script src="js/main.js"></script>
+</body>
+</html> 
