@@ -1,0 +1,15 @@
+exclude:
+  - venv
+  - node_modules
+  - .git
+  - .github
+  - README.md
+  - .gitignore
+  - .nojekyll
+  - package.json
+  - package-lock.json
+  - test-token.js
+  - test_token.py
+  - tests.html
+  - models
+  - .DS_Store
