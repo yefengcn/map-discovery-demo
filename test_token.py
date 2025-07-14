@@ -1,7 +1,9 @@
 import requests
+import os
 
 def test_token():
-    token = "pk.eyJ1IjoiMjc1NDc3OTAwN3FxY29tIiwiYSI6ImNqajViOTRibjF3b3oza3Axdm83ajBqYzcifQ.E-WgBuOW5mlelsmBeUN47Q"
+    # 从环境变量获取token，如果没有则使用默认值（仅用于测试）
+    token = os.getenv('MAPBOX_ACCESS_TOKEN', "pk.eyJ1IjoiMjc1NDc3OTAwN3FxY29tIiwiYSI6ImNqajViOTRibjF3b3oza3Axdm83ajBqYzcifQ.E-WgBuOW5mlelsmBeUN47Q")
     print("正在测试 Mapbox token...")
     
     # 使用 Mapbox Geocoding API 测试

@@ -1,7 +1,7 @@
 // 初始化地图
 const map = new maplibregl.Map({
     container: 'map',
-    style: `https://api.maptiler.com/maps/streets-dark/style.json?key=tSrycxD3kDmTDWxY9Tm7`,
+    style: `${config.endpoints.maptilerStyle}?key=${config.maptiler.apiKey}`,
     center: [103.8280, 1.2762], // Silat Road
     zoom: 16,
     pitch: 30,
@@ -401,7 +401,7 @@ document.getElementById('circle-explore').addEventListener('click', () => {
             // 取消绘制
             clearMapLayers();
             popup.remove();
-            map.off('mousemove');
+            map.off('mousemove', handleMouseMove);
             document.removeEventListener('keydown', handleKeyPress);
         } else if (e.key === 'Backspace' && polygonPoints.length > 0) {
             // 删除上一个点
@@ -626,7 +626,8 @@ document.getElementById('circle-explore').addEventListener('click', () => {
                 map.off('click', drawingClickHandler);
                 drawingClickHandler = null;
             }
-            map.off('mousemove');
+            map.off('mousemove', handleMouseMove);
+            document.removeEventListener('keydown', handleKeyPress);
         }
     }
     
@@ -1021,10 +1022,9 @@ document.getElementById('sketch-route').addEventListener('click', () => {
     async function getRoute(start, end, preference = null) {
         try {
             // 使用 Mapbox Directions API
-            const accessToken = 'pk.eyJ1IjoiMjc1NDc3OTAwN3FxY29tIiwiYSI6ImNqajViOTRibjF3b3oza3Axdm83ajBqYzcifQ.E-WgBuOW5mlelsmBeUN47Q';
             const coordinates = `${start[0]},${start[1]};${end[0]},${end[1]}`;
             // 增加 alternatives 参数以获取更多替代路线
-            const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${coordinates}?alternatives=true&geometries=geojson&overview=full&access_token=${accessToken}`;
+            const url = `${config.endpoints.mapboxDirections}/${coordinates}?alternatives=true&geometries=geojson&overview=full&access_token=${config.mapbox.accessToken}`;
             
             console.log('Mapbox Request URL:', url); // 调试日志
             
@@ -1092,6 +1092,17 @@ document.getElementById('sketch-route').addEventListener('click', () => {
     
     // 计算直线距离（米）
     function calculateDirectDistance(start, end) {
+        // 检查输入参数
+        if (!start || !end || !Array.isArray(start) || !Array.isArray(end) || 
+            start.length !== 2 || end.length !== 2) {
+            return 0;
+        }
+        
+        // 检查坐标是否相同
+        if (start[0] === end[0] && start[1] === end[1]) {
+            return 0;
+        }
+        
         const R = 6371e3; // 地球半径（米）
         const φ1 = start[1] * Math.PI/180;
         const φ2 = end[1] * Math.PI/180;
@@ -1101,6 +1112,12 @@ document.getElementById('sketch-route').addEventListener('click', () => {
         const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
                 Math.cos(φ1) * Math.cos(φ2) *
                 Math.sin(Δλ/2) * Math.sin(Δλ/2);
+        
+        // 防止数值精度问题导致的错误
+        if (a >= 1) {
+            return Math.PI * R; // 最大距离（半圆）
+        }
+        
         const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 
         return R * c;
